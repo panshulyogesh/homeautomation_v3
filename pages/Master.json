@@ -1,0 +1,414 @@
+{
+  "assistant_name": "raju",
+  "action": [
+    "again",
+    "repeat",
+    "increase",
+    "decrease",
+    "set",
+    "reset",
+    "make",
+    "turn",
+    "move",
+    "start",
+    "stop",
+    "open",
+    "close"
+  ],
+  "location": [
+    "dining",
+    "kitchen",
+    "hall",
+    "garden",
+    "studyroom",
+    "utility",
+    "drawingroom",
+    "livingroom",
+    "workroom",
+    "basementbedroom",
+    "secondfloorbedroomwindow",
+    "garageshutterdoor",
+    "firstfloormaindoor",
+    "firstfloorbedroomdoor"
+  ],
+  "appliance": [
+    "tubelight",
+    "tablefan",
+    "fan",
+    "light",
+    "ac",
+    "refrigerator",
+    "exhaustfan",
+    "television",
+    "tv",
+    "celingfan",
+    "airconditioner",
+    "frontdoorlock",
+    "securitycamera"
+  ],
+  "property": [
+    "direction",
+    "switch",
+    "power",
+    "speed",
+    "brightness",
+    "state",
+    "volume",
+    "temperature",
+    "swing",
+    "height",
+    "zoom",
+    "pan",
+    "tilt",
+    "samplingrate",
+    "automaticgaincorrection",
+    "lowpassfilter"
+  ],
+  "property_value": [
+    "on",
+    "off",
+    "low",
+    "min",
+    "max",
+    "medium",
+    "high",
+    "up",
+    "down",
+    "left",
+    "right",
+    "verylow",
+    "veryhigh",
+    "tennmilliseconds",
+    "10milliseconds",
+    "thirtydegreecelcius"
+  ],
+  "property_units": [
+    "celcius",
+    "farenheit",
+    "kg",
+    "pounds",
+    "grams",
+    "milligrams",
+    "kilometers",
+    "miles",
+    "degree"
+  ],
+  "stopwords": [
+    "the",
+    "it",
+    "of",
+    "and",
+    "feel",
+    "for",
+    "me",
+    "you",
+    "there",
+    "here",
+    "very",
+    "good",
+    "bad",
+    "they",
+    "so",
+    "extreemly",
+    "fine",
+    "a",
+    "about",
+    "after",
+    "all",
+    "also",
+    "always",
+    "am",
+    "an",
+    "any",
+    "are",
+    "at",
+    "be",
+    "been",
+    "being",
+    "but",
+    "by",
+    "came",
+    "can",
+    "cant",
+    "come",
+    "could",
+    "did",
+    "didnt",
+    "do",
+    "does",
+    "doesnt",
+    "doing",
+    "dont ",
+    "else",
+    "from",
+    "get",
+    "give",
+    "goes",
+    "going",
+    "had",
+    "happen",
+    "has",
+    "have",
+    "having",
+    "how",
+    "i",
+    "if",
+    "ill",
+    "im",
+    "in",
+    "into",
+    "is",
+    "isnt",
+    "it",
+    "its",
+    "just",
+    "keep",
+    "let",
+    "like",
+    "made",
+    "make",
+    "many",
+    "may",
+    "mean",
+    "more",
+    "most",
+    "much",
+    "no",
+    "not",
+    "now",
+    "only",
+    "or",
+    "our",
+    "really",
+    "say",
+    "see",
+    "some",
+    "something",
+    "take",
+    "tell",
+    "than",
+    "that",
+    "the",
+    "their",
+    "them",
+    "then",
+    "thing",
+    "this",
+    "to",
+    "try",
+    "up",
+    "us",
+    "use",
+    "used",
+    "uses",
+    "want",
+    "was",
+    "way",
+    "we",
+    "what",
+    "when",
+    "where",
+    "which",
+    "who",
+    "why",
+    "will",
+    "with",
+    "without",
+    "wont",
+    "your",
+    "youre",
+    "amount",
+    "fashion",
+    "picture",
+    "area",
+    "feeling",
+    "process",
+    "aspect",
+    "field",
+    "rate",
+    "attitude",
+    "level",
+    "realm",
+    "basis",
+    "manner",
+    "respect",
+    "case",
+    "means",
+    "role",
+    "degree",
+    "nature",
+    "scope",
+    "experience",
+    "order",
+    "situation",
+    "fact",
+    "part",
+    "state",
+    "factor",
+    "period",
+    "type",
+    "accomplish",
+    "have",
+    "achieve",
+    "make",
+    "be",
+    "occur",
+    "bring",
+    "about",
+    "provide",
+    "cause",
+    "result",
+    "do",
+    "serve",
+    "exercise",
+    "take",
+    "place",
+    "give"
+  ],
+  "model": [
+    {
+      "appliance": "ac_bajaj_x123"
+    },
+    {
+      "appliance": "ac_bajaj_x123"
+    },
+    {
+      "appliance": "ac_havels_x123"
+    },
+    {
+      "appliance": "ac_crompton_x124"
+    }
+  ],
+  "appliances": [
+    "fan",
+    "light",
+    "ac",
+    "refrigerator",
+    "exhaustfan",
+    "television",
+    "celingfan",
+    "frontdoorlock",
+    "securitycamera"
+  ],
+  "Device": {
+    "fan": {
+      "make": [
+        "bajaj",
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "xyz123",
+        "def456",
+        "other"
+      ]
+    },
+    "light": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "ac": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "refrigerator": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "exhaustfan": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "television": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "celingfan": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "frontdoorlock": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    },
+    "securitycamera": {
+      "make": [
+        "bajaj",
+        "havels",
+        "crompton",
+        "other"
+      ],
+      "model": [
+        "abc123",
+        "def456",
+        "other"
+      ]
+    }
+  }
+}
