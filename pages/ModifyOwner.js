@@ -63,6 +63,11 @@ const ModifyOwner = ({navigation}) => {
   const [deviceip, setdeviceip] = useState('');
   const [showmodal, setshowmodal] = useState(false);
   const [macid, setmacid] = useState('');
+  const [router_ssid, setrouter_ssid] = useState('');
+  const [router_password, setrouter_password] = useState('');
+  const [DAQ_STACTIC_IP, setDAQ_STACTIC_IP] = useState('');
+  const [DAQ_STACTIC_Port, setDAQ_STACTIC_Port] = useState('');
+
   let updateAllStates = (
     ownername,
     owner_password,
@@ -74,6 +79,10 @@ const ModifyOwner = ({navigation}) => {
     pincode,
     Street,
     Door_Number,
+    router_ssid,
+    router_password,
+    DAQ_STACTIC_IP,
+    DAQ_STACTIC_Port,
   ) => {
     setOwnerName(ownername);
     setpassword(owner_password);
@@ -85,7 +94,12 @@ const ModifyOwner = ({navigation}) => {
     setpincode(pincode);
     setStreet(Street);
     setDoor_Number(Door_Number);
+    setrouter_ssid(router_ssid);
+    setrouter_password(router_password);
+    setDAQ_STACTIC_IP(DAQ_STACTIC_IP);
+    setDAQ_STACTIC_Port(DAQ_STACTIC_Port);
   };
+
   useFocusEffect(
     React.useCallback(() => {
       db.transaction(tx => {
@@ -107,6 +121,10 @@ const ModifyOwner = ({navigation}) => {
                 res.pincode,
                 res.Street,
                 res.Door_Number,
+                res.router_ssid,
+                res.router_password,
+                res.DAQ_STACTIC_IP,
+                res.DAQ_STACTIC_Port,
               );
             } else {
               alert('No user found');
@@ -115,10 +133,6 @@ const ModifyOwner = ({navigation}) => {
           },
         );
       });
-      // DeviceInfo.getIpAddress().then(ip => {
-      //console.log(ip);
-      //   setdeviceip(ip);
-      // });
     }, []),
   );
 
@@ -142,7 +156,7 @@ const ModifyOwner = ({navigation}) => {
 
     db.transaction(function (tx) {
       tx.executeSql(
-        `UPDATE  Owner_Reg SET 
+        `UPDATE Owner_Reg SET 
               owner_name=?, owner_password=?,MailId=?,PhoneNumber=?,Property_name=? ,Area=?,State=?,pincode=?,Street=?,Door_Number=?
               where Id=?`,
         [
@@ -182,8 +196,6 @@ const ModifyOwner = ({navigation}) => {
   };
 
   function ownerreg() {
-    ///REGISTER/Owner_name;controller_Key;Device_name;Device_Model;Custom_SSID;Custom_pwd;DAQ_STACTIC_IP;DAQ_STACTIC_Port;Device_IP;Device_Port;
-
     //!     owner_name ====> sahique,.......
     //!     controller_key ==>  generated key on mobile side for encryption/decryption
     //!     Device_name
@@ -203,18 +215,6 @@ const ModifyOwner = ({navigation}) => {
       'REGISTER' +
       '/' +
       OwnerName +
-      // '_' +
-      // Door_Number +
-      // '_' +
-      // Property_name +
-      // '_' +
-      // Street +
-      // '_' +
-      // Area +
-      // '_' +
-      // State +
-      // '_' +
-      // pincode +
       ';' +
       'ACSREACTNATIVE123KEY' +
       ';' +
@@ -222,23 +222,39 @@ const ModifyOwner = ({navigation}) => {
       ';' +
       'devmodel' +
       ';' +
-      'Airtel_5Ghz' +
+      router_ssid +
       ';' +
-      'cuspass' +
+      router_password +
       ';' +
-      'daqip' +
+      DAQ_STACTIC_IP +
       ';' +
-      'daqport' +
+      DAQ_STACTIC_Port +
       ';' +
       '192.168.4.1' +
       ';' +
       '80' +
       ';' +
-      'devicessid' +
+      'esp-1' +
       ';' +
-      'pass' +
+      '1234' +
+      ';' +
+      PhoneNumber +
       ';' +
       '#';
+
+    // String Owner_name;
+    // String controller_Key;
+    // String Device_name;
+    // String Device_Model;
+    // String router_SSID;   // for connection through router to my device
+    // String router_password;   // for connection through router to my device
+    // String DAQ_STACTIC_IP;    // for connection to data acqusition from my device (raspberry pi)
+    // String DAQ_STACTIC_Port;  // for connection to data acqusition from my device (raspberry pi)
+    // String my_IP;   // for direct connection to my device
+    // String my_Port;   // for direct connection to my device
+    // const char* my_SSID ;   // for direct connection to my device
+    // const char* my_Password ;   // for direct connection to my device
+    // String gateway_SMS_ph_no;
 
     console.log(ownerpair);
     //! TCP PROTOCOL OVER WIFI

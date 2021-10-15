@@ -682,49 +682,49 @@ const FirstPage = ({navigation}) => {
     setselectedvaildstate(finalval_obj);
   };
 
-  function handledefault(items) {
-    console.log('----defaul-----');
-    console.log(items);
-    console.log(selectloc);
-    console.log(selectedappliance);
+  // function handledefault(items) {
+  //   console.log('----defaul-----');
+  //   console.log(items);
+  //   console.log(selectloc);
+  //   console.log(selectedappliance);
 
-    let sub;
-    var s = '';
-    var findobj;
-    selectedvaildstate.forEach(element => {
-      //  console.log('ele', element);
-      console.log('===');
-      findobj = mapped_data.find(x => x.property.includes(element.property));
-      console.log('findobj', findobj);
-      var validstate = findobj.validstate.toString().split(',');
-      console.log('valid state===>', validstate);
-      var output = findobj.output.toString().split(',');
-      console.log('output===>', output);
-      let index = validstate.indexOf(element.validstate);
-      console.log('index', index);
-      var findoutput = output[index];
-      console.log('findoutput', findoutput);
+  //   let sub;
+  //   var s = '';
+  //   var findobj;
+  //   selectedvaildstate.forEach(element => {
+  //     //  console.log('ele', element);
+  //     console.log('===');
+  //     findobj = mapped_data.find(x => x.property.includes(element.property));
+  //     console.log('findobj', findobj);
+  //     var validstate = findobj.validstate.toString().split(',');
+  //     console.log('valid state===>', validstate);
+  //     var output = findobj.output.toString().split(',');
+  //     console.log('output===>', output);
+  //     let index = validstate.indexOf(element.validstate);
+  //     console.log('index', index);
+  //     var findoutput = output[index];
+  //     console.log('findoutput', findoutput);
 
-      sub = findoutput + ';' + findobj.esp_pin + ';';
+  //     sub = findoutput + ';' + findobj.esp_pin + ';';
 
-      s += sub;
-    });
+  //     s += sub;
+  //   });
 
-    console.log('s', s);
-    // db.transaction(tx => {
-    //   tx.executeSql(
-    //     `UPDATE  Binding_Reg set default_values = ? where
-    //     (location=? and appliance =? );`,
-    //     [],
-    //     (tx, results) => {
-    //       console.log('Results', results.rowsAffected);
-    //       if (results.rowsAffected > 0) {
-    //         Alert.alert('preferred value set successfully');
-    //       } else alert('Updation Failed');
-    //     },
-    //   );
-    // });
-  }
+  //   console.log('s', s);
+  //   // db.transaction(tx => {
+  //   //   tx.executeSql(
+  //   //     `UPDATE  Binding_Reg set default_values = ? where
+  //   //     (location=? and appliance =? );`,
+  //   //     [],
+  //   //     (tx, results) => {
+  //   //       console.log('Results', results.rowsAffected);
+  //   //       if (results.rowsAffected > 0) {
+  //   //         Alert.alert('preferred value set successfully');
+  //   //       } else alert('Updation Failed');
+  //   //     },
+  //   //   );
+  //   // });
+  // }
 
   function handlerun(params) {
     if (selectloc.length == 0) {
@@ -932,7 +932,7 @@ const FirstPage = ({navigation}) => {
                       maximumTrackTintColor="#d3d3d3"
                       minimumTrackTintColor="rgb(252, 228, 149)"
                     />
-                    <Button
+                    {/* <Button
                       transparent
                       onPress={() => handledefault(selectedvaildstate)}>
                       <Icon
@@ -940,7 +940,7 @@ const FirstPage = ({navigation}) => {
                         type="Feather"
                         style={{fontSize: 30, color: 'blue'}}
                       />
-                    </Button>
+                    </Button> */}
                     <View style={styles.textCon}>
                       {items.x.map(shop => {
                         return (

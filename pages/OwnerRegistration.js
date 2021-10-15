@@ -46,6 +46,10 @@ const OwnerRegistration = ({navigation}) => {
   const [State, setState] = useState('');
   const [pincode, setpincode] = useState('');
   const [Door_Number, setDoor_Number] = useState('');
+  const [router_ssid, setrouter_ssid] = useState('');
+  const [router_password, setrouter_password] = useState('');
+  const [DAQ_STACTIC_IP, setDAQ_STACTIC_IP] = useState('');
+  const [DAQ_STACTIC_Port, setDAQ_STACTIC_Port] = useState('');
 
   async function handleSubmitPress() {
     setModalVisible(!modalVisible);
@@ -59,7 +63,11 @@ const OwnerRegistration = ({navigation}) => {
       !State ||
       !pincode ||
       !Street ||
-      !Door_Number
+      !Door_Number ||
+      !router_ssid ||
+      !router_password ||
+      !DAQ_STACTIC_IP ||
+      !DAQ_STACTIC_Port
     ) {
       alert('Please fill all the fields');
       return;
@@ -68,8 +76,9 @@ const OwnerRegistration = ({navigation}) => {
     db.transaction(function (tx) {
       tx.executeSql(
         `INSERT INTO Owner_Reg ( 
-              owner_name, owner_password,MailId,PhoneNumber,Property_name ,Area ,State ,pincode ,Street,Door_Number)
-               VALUES (?,?,?,?,?,?,?,?,?,?)`,
+              owner_name, owner_password,MailId,PhoneNumber,Property_name ,Area ,State ,pincode ,Street,Door_Number,
+              router_ssid ,router_password ,DAQ_STACTIC_IP , DAQ_STACTIC_Port)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         [
           OwnerName.toString().toUpperCase(),
           password.toString().toUpperCase(),
@@ -81,6 +90,10 @@ const OwnerRegistration = ({navigation}) => {
           pincode.toString().toUpperCase(),
           Street.toString().toUpperCase(),
           Door_Number.toString().toUpperCase(),
+          router_ssid.toString(),
+          router_password.toString(),
+          DAQ_STACTIC_IP.toString(),
+          DAQ_STACTIC_Port.toString(),
         ],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
@@ -106,56 +119,6 @@ const OwnerRegistration = ({navigation}) => {
       );
     });
   }
-
-  // function ownerreg() {
-  //   if (
-  //     !OwnerName ||
-  //     !MailId ||
-  //     !PhoneNumber ||
-  //     !Property_name ||
-  //     !Area ||
-  //     !State ||
-  //     !pincode ||
-  //     !Street ||
-  //     !Door_Number
-  //   ) {
-  //     alert('Please fill all the fields');
-  //     return;
-  //   }
-
-  //   //Owner_name;controller_Key;Device_name;Device_Model;Custom_SSID;DAQ_STACTIC_IP;DAQ_STACTIC_Port;Device_IP;Device_Port;
-  //   let ownerpair =
-  //     OwnerName +
-  //     '_' +
-  //     MailId +
-  //     '_' +
-  //     PhoneNumber +
-  //     '_' +
-  //     Property_name +
-  //     '_' +
-  //     Area +
-  //     '_' +
-  //     State +
-  //     '_' +
-  //     pincode +
-  //     '_' +
-  //     Street +
-  //     '_' +
-  //     Door_Number +
-  //     ';' +
-  //     'ACSREACTNATIVE123KEY' +
-  //     ';';
-  //   'devname' +
-  //     ';' +
-  //     'devmodel' +
-  //     ';' +
-  //     'Airtel_5Ghz' +
-  //     ';' +
-  //     'daqip' +
-  //     ';' +
-  //     'daqport' +
-  //     ';';
-  // }
 
   return (
     <View style={styles.container}>
@@ -256,6 +219,46 @@ const OwnerRegistration = ({navigation}) => {
               placeholderTextColor="#05375a"
               placeholder="Apartment Number/House Number"
               onChangeText={Door_Number => setDoor_Number(Door_Number)}
+            />
+          </View>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholderTextColor="#05375a"
+              placeholder="router_ssid"
+              onChangeText={router_ssid => setrouter_ssid(router_ssid)}
+            />
+          </View>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholderTextColor="#05375a"
+              placeholder="router_password"
+              onChangeText={router_password =>
+                setrouter_password(router_password)
+              }
+            />
+          </View>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholderTextColor="#05375a"
+              placeholder="DAQ_STACTIC_IP"
+              onChangeText={DAQ_STACTIC_IP => setDAQ_STACTIC_IP(DAQ_STACTIC_IP)}
+            />
+          </View>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholderTextColor="#05375a"
+              placeholder="DAQ_STACTIC_Port"
+              onChangeText={DAQ_STACTIC_Port =>
+                setDAQ_STACTIC_Port(DAQ_STACTIC_Port)
+              }
             />
           </View>
 

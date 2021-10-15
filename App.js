@@ -121,13 +121,14 @@ const App = () => {
               State TEXT,
               pincode TEXT,
               Street TEXT,
-              Door_Number  TEXT)`,
+              Door_Number  TEXT,router_ssid TEXT,router_password TEXT,DAQ_STACTIC_IP TEXT, DAQ_STACTIC_Port TEXT )`,
               [],
             );
           }
         },
       );
     });
+
     //! location registration table for registering locations like hall , kitchen ,bedroom etc
     db.transaction(function (txn) {
       txn.executeSql(
@@ -179,8 +180,8 @@ const App = () => {
               `CREATE TABLE IF NOT EXISTS Binding_Reg(location TEXT,
               appliance TEXT, model TEXT,paired_unpaired TEXT,
               ipaddress TEXT,macid TEXT,portnumber TEXT,wifi_ssid TEXT,wifi_pwd TEXT,
-              properties TEXT,Control_function TEXT,pin_direction TEXT,Valid_States TEXT,output TEXT,
-              ACS_controller_model TEXT,ESP_pin TEXT,status TEXT,color TEXT ,idle_Values TEXT,default_values TEXT)`,
+              properties TEXT,Control_function TEXT,pin_direction TEXT,Valid_States TEXT,output TEXT,lan TEXT,wan TEXT,
+              ACS_controller_model TEXT,ESP_pin TEXT,status TEXT,color TEXT)`,
               [],
             );
           }
@@ -188,9 +189,6 @@ const App = () => {
       );
     });
 
-    //{"Model":"Havells_Ceilingfan_Fusion","Properties":"Speed;Swing;",
-    // "Contol_type":"Digital output,","Valid States":"low,medium,high;on,off;","output":"800-100,800-200,800-300,800-400,800-600;0-1,0-0;",
-    // "ACS_controller_model":"ACS_ESP01_M1","ESP_pin":"GPIO0;GPIO2","Driver_":"exefiles"}
     //!  models list table is to store appliance models properties which is a global reserve and is captured from a serveer
     db.transaction(function (txn) {
       txn.executeSql(
@@ -201,7 +199,7 @@ const App = () => {
             txn.executeSql('DROP TABLE IF EXISTS models_list', []);
             txn.executeSql(
               `CREATE TABLE IF NOT EXISTS models_list(Model TEXT,Properties TEXT,Control_function TEXT,pin_direction TEXT,
-              Valid_States TEXT,output TEXT,ACS_controller_model TEXT,ESP_pin TEXT , idle_Values TEXT , default_values TEXT)`,
+              Valid_States TEXT,output TEXT,ACS_controller_model TEXT,ESP_pin TEXT )`,
               [],
             );
           }

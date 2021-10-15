@@ -306,11 +306,30 @@ const Binding = ({navigation}) => {
     portnumber,
     macid,
   ) {
+    console.log(
+      location.toString().toUpperCase(),
+      appliance.toString().toUpperCase(),
+      model.toString(),
+      'unpaired',
+      'grey',
+      selectedmodel.Properties,
+      selectedmodel.Control_function,
+      selectedmodel.pin_direction,
+      selectedmodel.Valid_States,
+      selectedmodel.output,
+      selectedmodel.ACS_controller_model,
+      selectedmodel.ESP_pin,
+      ipaddress,
+      portnumber,
+      macid,
+      'grey',
+      'grey',
+    );
     db.transaction(function (tx) {
       tx.executeSql(
         `INSERT INTO Binding_Reg (location,appliance,model,paired_unpaired,
-        color,properties ,Control_function, pin_direction,Valid_States,output,ACS_controller_model,ESP_pin,ipaddress,portnumber,macid)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);  `,
+        color,properties ,Control_function, pin_direction,Valid_States,output,ACS_controller_model,ESP_pin,ipaddress,portnumber,macid,lan ,wan )
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);  `,
         [
           location.toString().toUpperCase(),
           appliance.toString().toUpperCase(),
@@ -327,6 +346,8 @@ const Binding = ({navigation}) => {
           ipaddress,
           portnumber,
           macid,
+          'grey',
+          'grey',
         ],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
@@ -337,7 +358,7 @@ const Binding = ({navigation}) => {
           }
         },
         (tx, error) => {
-          console.log(error);
+          console.log('db error', error);
           navigation.navigate('DummyScreen', {
             paramKey: 'Binding_samedata',
           });
@@ -717,7 +738,7 @@ const Binding = ({navigation}) => {
       tx.executeSql(
         `INSERT INTO  models_list (
         Model ,Properties ,Control_function ,pin_direction,
-              Valid_States ,output ,ACS_controller_model ,ESP_pin, idle_values, default_values) VALUES(?,?,?,?,?,?,?,?,?,?)`,
+              Valid_States ,output ,ACS_controller_model ,ESP_pin) VALUES(?,?,?,?,?,?,?,?)`,
         [
           info.Model,
           info.Properties,
@@ -727,8 +748,6 @@ const Binding = ({navigation}) => {
           info.output,
           info.ACS_controller_model,
           info.ESP_pin,
-          info.ideal_Values,
-          info.default_values,
         ],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
@@ -857,11 +876,32 @@ const Binding = ({navigation}) => {
     pwd,
     macid,
   ) {
+    console.log(
+      location.toString().toUpperCase(),
+      appliance.toString().toUpperCase(),
+      model.toString().toUpperCase(),
+      selectedmodel.Properties,
+      selectedmodel.Control_function,
+      selectedmodel.pin_direction,
+      selectedmodel.Valid_States,
+      selectedmodel.output,
+      selectedmodel.ACS_controller_model,
+      selectedmodel.ESP_pin,
+      ipaddress,
+      portnumber,
+      ssid,
+      pwd,
+      macid,
+      selectedloc,
+      selectedappliance,
+      selectedmodel,
+    );
+
     db.transaction(function (tx) {
       tx.executeSql(
         `UPDATE Binding_Reg SET location=?,appliance=?,model=?,
         properties=?,Control_function=?,pin_direction=?,Valid_States=?,output=?,ACS_controller_model=?,ESP_pin=?,ipaddress=?,portnumber=?,
-        wifi_ssid=?,wifi_pwd =?,   macid=? ,idle_Values =? , default_values =?
+        wifi_ssid=?,wifi_pwd =?,   macid=? 
         where  (location=? and appliance =? and model =?);`,
         [
           location.toString().toUpperCase(),
@@ -879,8 +919,6 @@ const Binding = ({navigation}) => {
           ssid,
           pwd,
           macid,
-          selectedmodel.idle_Values,
-          selectedmodel.default_values,
           selectedloc,
           selectedappliance,
           selectedmodel,
@@ -894,7 +932,7 @@ const Binding = ({navigation}) => {
           }
         },
         (tx, error) => {
-          console.log(error);
+          console.log('DBV ERROR ', error);
           navigation.navigate('DummyScreen', {
             paramKey: 'Binding_samedata',
           });
@@ -917,7 +955,7 @@ const Binding = ({navigation}) => {
           }
         },
         (tx, error) => {
-          console.log(error);
+          console.log('DB ERROR ', error);
           // navigation.navigate('DummyScreen', {
           //   paramKey: 'Binding_samedata',
           // });

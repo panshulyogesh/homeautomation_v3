@@ -402,6 +402,150 @@ const Pairing = ({navigation}) => {
     }
   }
 
+  function handlelan(items) {
+    let lanstring =
+      item.macid +
+      '/' +
+      'NETWORK' +
+      '/' +
+      'LAN' +
+      ';' +
+      owner.router_ssid +
+      ';' +
+      owner.router_password +
+      ';';
+
+    console.log('lans string', lanstring);
+
+    let client = TcpSocket.createConnection(
+      {port: item.portnumber, host: item.ipadress},
+      () => {
+        client.write(lanstring.toString());
+      },
+    );
+    client.on('connect', () => {
+      console.log('Opened client on ' + JSON.stringify(client.address()));
+    });
+    client.on('data', data => {
+      console.log('message was received from ESP32 ==>', data.toString());
+      //! ack:success;macid#
+      //["ack","success","macid"]
+      let ack = data
+        .toString()
+        .replace(':', ',')
+        .replace(';', ',')
+        .replace('#', '')
+        .split(',');
+      console.log(ack);
+      if (ack[1] == 'success') {
+        lan(item, ack);
+      }
+
+      client.end();
+    });
+    client.on('error', error => {
+      console.log('error', error);
+      Alert.alert('please check your wifi connection');
+      client.end();
+    });
+    client.on('close', () => {
+      console.log('Connection closed!');
+      client.end();
+    });
+
+    // NETWORK/LAN;abcdefgh;123456;
+  }
+
+  function lan(item, ack) {
+    db.transaction(tx => {
+      tx.executeSql(
+        `UPDATE  Binding_Reg set lan =?,wan=? where
+        (location=? and appliance =? and model =?);`,
+        ['green', 'grey', item.location, item.appliance, item.model],
+        (tx, results) => {
+          console.log('Results', results.rowsAffected);
+          if (results.rowsAffected > 0) {
+            navigation.navigate('DummyScreen', {
+              paramKey: 'pairing',
+            });
+          } else alert('Updation Failed');
+        },
+      );
+    });
+  }
+
+  function handlewan(items) {
+    let wanstring =
+      item.macid +
+      '/' +
+      'NETWORK' +
+      '/' +
+      'WAN' +
+      ';' +
+      owner.DAQ_STACTIC_IP +
+      ';' +
+      owner.DAQ_STACTIC_Port +
+      ';';
+
+    console.log('wans string', wanstring);
+
+    let client = TcpSocket.createConnection(
+      {port: item.portnumber, host: item.ipadress},
+      () => {
+        client.write(wanstring.toString());
+      },
+    );
+    client.on('connect', () => {
+      console.log('Opened client on ' + JSON.stringify(client.address()));
+    });
+    client.on('data', data => {
+      console.log('message was received from ESP32 ==>', data.toString());
+      //! ack:success;macid#
+      //["ack","success","macid"]
+      let ack = data
+        .toString()
+        .replace(':', ',')
+        .replace(';', ',')
+        .replace('#', '')
+        .split(',');
+      console.log(ack);
+      if (ack[1] == 'success') {
+        wan(item, ack);
+      }
+
+      client.end();
+    });
+    client.on('error', error => {
+      console.log('error', error);
+      Alert.alert('please check your wifi connection');
+      client.end();
+    });
+    client.on('close', () => {
+      console.log('Connection closed!');
+      client.end();
+    });
+
+    // NETWORK/LAN;abcdefgh;123456;
+  }
+
+  function wan(item, ack) {
+    db.transaction(tx => {
+      tx.executeSql(
+        `UPDATE  Binding_Reg set lan =?,wan=? where
+        (location=? and appliance =? and model =?);`,
+        ['grey', 'green', item.location, item.appliance, item.model],
+        (tx, results) => {
+          console.log('Results', results.rowsAffected);
+          if (results.rowsAffected > 0) {
+            navigation.navigate('DummyScreen', {
+              paramKey: 'pairing',
+            });
+          } else alert('Updation Failed');
+        },
+      );
+    });
+  }
+
   function unpairing(item, ack) {
     db.transaction(tx => {
       tx.executeSql(
@@ -480,6 +624,16 @@ const Pairing = ({navigation}) => {
 
             <Button transparent onPress={() => handlepairing(item)}>
               <Icon name="wifi" style={{fontSize: 30, color: item.color}} />
+            </Button>
+
+            <Button transparent onPress={() => handlelan(item)}>
+              <Icon name="server" style={{fontSize: 30, color: item.lan}} />
+            </Button>
+            <Button transparent onPress={() => handlewan(item)}>
+              <Icon
+                name="rocket-sharp"
+                style={{fontSize: 30, color: item.wan}}
+              />
             </Button>
           </View>
         )}
